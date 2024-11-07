@@ -3,15 +3,19 @@ import Header from "./Header";
 
 import ProductCollections from "./ProductCollections";
 import ProductBoard from "./products/ProductBoard";
+import ProductProvider from "./provider/ProductProvider";
+import CartProvider from "./provider/CartProvider";
 
 function App() {
   return (
-    <>
-      <Header />
-      <ProductCollections />
-      <ProductBoard />
-      <Footer />
-    </>
+    <ProductProvider>
+      <CartProvider>
+        <Header />
+        <ProductCollections />
+        <ProductBoard />
+        <Footer />
+      </CartProvider>
+    </ProductProvider>
   );
 }
 

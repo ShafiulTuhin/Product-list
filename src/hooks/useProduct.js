@@ -23,8 +23,6 @@ const useProduct = () => {
       }
       const data = await response.json();
 
-      console.log(data);
-
       setProductData(data);
     } catch (err) {
       setError(err);
