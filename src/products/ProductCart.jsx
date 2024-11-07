@@ -4,7 +4,6 @@ import { CartContext } from "../context";
 
 const ProductCart = () => {
   const { cartItems } = useContext(CartContext);
-  console.log(cartItems);
   return (
     <div className="flow-root">
       <a href="#" className="group -m-2 flex items-center p-2">
