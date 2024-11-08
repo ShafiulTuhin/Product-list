@@ -68,7 +68,7 @@ const useProduct = () => {
   const fetchProductWithCategory = async (category) => {
     try {
       const response = await fetch(
-        `'https://fakestoreapi.com/products/${category}`
+        `https://fakestoreapi.com/products/${category}`
       );
       if (!response.ok) {
         const errorMessage = `Fetching Category product failed: ${response.status}`;

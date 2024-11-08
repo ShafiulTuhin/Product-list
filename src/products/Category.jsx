@@ -5,15 +5,6 @@ const Category = () => {
   const { categories, setSelectedCategories } = useContext(ProductContext);
   const [showCatModal, setShowCatModal] = useState(false);
 
-  // const handleCategoryChange = (category) => {
-  //   setSelectedCategories((prev) =>
-  //     prev.includes(category)
-  //       ? prev.filter((cat) => cat !== category)
-  //       : [...prev, category]
-  //   );
-  //   setShowCatModal(false);
-  // };
-
   const handleCategoryChange = (category) => {
     setSelectedCategories(category);
     setShowCatModal(false);
@@ -64,8 +55,7 @@ const Category = () => {
                   type="checkbox"
                   className="form-checkbox h-4 w-4"
                   id="filter-option-1"
-                  // checked={(e) => e.target.value}
-                  checked={() => setSelectedCategories(category)}
+                  checked={(e) => e.target.checked}
                   onChange={() => handleCategoryChange(category)}
                 />
 
