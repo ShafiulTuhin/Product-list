@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductContext } from "../context";
 
-const Sort = () => {
-  const [showSort, setShowSort] = useState(false);
-
+const Sort = ({ showSort, setShowSort, onSort }) => {
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -42,8 +41,8 @@ const Sort = () => {
               className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
               role="menuitem"
               tabIndex="-1"
-              onClick="toggleDropdown()"
               id="menu-item-0"
+              onClick={() => onSort("asc")}
             >
               Low to High
             </span>
@@ -52,8 +51,8 @@ const Sort = () => {
               className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
               role="menuitem"
               tabIndex="-1"
-              onClick="toggleDropdown()"
               id="menu-item-0"
+              onClick={() => onSort("desc")}
             >
               High to Low
             </span>

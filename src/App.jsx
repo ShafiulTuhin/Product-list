@@ -6,6 +6,9 @@ import ProductBoard from "./products/ProductBoard";
 import ProductProvider from "./provider/ProductProvider";
 import CartProvider from "./provider/CartProvider";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <ProductProvider>
@@ -14,6 +17,7 @@ function App() {
         <ProductCollections />
         <ProductBoard />
         <Footer />
+        <ToastContainer />
       </CartProvider>
     </ProductProvider>
   );

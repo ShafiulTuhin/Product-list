@@ -1,7 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductContext } from "../context";
 
 const Category = () => {
+  const { categories, setSelectedCategories } = useContext(ProductContext);
   const [showCatModal, setShowCatModal] = useState(false);
+
+  // const handleCategoryChange = (category) => {
+  //   setSelectedCategories((prev) =>
+  //     prev.includes(category)
+  //       ? prev.filter((cat) => cat !== category)
+  //       : [...prev, category]
+  //   );
+  //   setShowCatModal(false);
+  // };
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategories(category);
+    setShowCatModal(false);
+  };
+
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -30,7 +47,7 @@ const Category = () => {
       </div>
       {showCatModal && (
         <div
-          className="absolute z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+          className="absolute z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="filter-button"
@@ -38,32 +55,23 @@ const Category = () => {
           id="filter-dropdown"
         >
           <div className="py-1" role="none">
-            <label className="inline-flex w-full cursor-pointer hover:bg-gray-50 items-center px-4 py-2 text-sm text-gray-700">
-              <input
-                type="checkbox"
-                className="form-checkbox h-4 w-4"
-                id="filter-option-1"
-              />
+            {categories.map((category) => (
+              <label
+                className="inline-flex w-full cursor-pointer hover:bg-gray-50 items-center px-4 py-2 text-sm text-gray-700"
+                key={category}
+              >
+                <input
+                  type="checkbox"
+                  className="form-checkbox h-4 w-4"
+                  id="filter-option-1"
+                  // checked={(e) => e.target.value}
+                  checked={() => setSelectedCategories(category)}
+                  onChange={() => handleCategoryChange(category)}
+                />
 
-              <span className="ml-2">Category-1</span>
-            </label>
-
-            <label className="inline-flex w-full cursor-pointer hover:bg-gray-50 items-center px-4 py-2 text-sm text-gray-700">
-              <input
-                type="checkbox"
-                className="form-checkbox h-4 w-4"
-                id="filter-option-2"
-              />
-              <span className="ml-2">Category 2</span>
-            </label>
-            <label className="inline-flex w-full cursor-pointer hover:bg-gray-50 items-center px-4 py-2 text-sm text-gray-700">
-              <input
-                type="checkbox"
-                className="form-checkbox h-4 w-4"
-                id="filter-option-3"
-              />
-              <span className="ml-2">Category 3</span>
-            </label>
+                <span className="ml-2">{category}</span>
+              </label>
+            ))}
           </div>
         </div>
       )}

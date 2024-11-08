@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Category from "./Category";
 import ProductCart from "./ProductCart";
 import ProductsDetails from "./ProductsDetails";
@@ -8,6 +8,18 @@ import { ProductContext } from "../context";
 
 const ProductBoard = () => {
   const { productData } = useContext(ProductContext);
+  const [showSort, setShowSort] = useState(false);
+  const [sortOrder, setSortOrder] = useState("asc");
+
+  productData.sort((a, b) =>
+    sortOrder === "asc" ? a.price - b.price : b.price - a.price
+  );
+
+  const handlePriceSort = (order) => {
+    setSortOrder(order);
+    setShowSort(false);
+  };
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="pt-16 sm:pt-24 lg:pt-40">
@@ -22,7 +34,11 @@ const ProductBoard = () => {
         <div className="mt-10">
           <div className="flex justify-between relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
             <div className="w-full">
-              <Sort />
+              <Sort
+                onSort={handlePriceSort}
+                showSort={showSort}
+                setShowSort={setShowSort}
+              />
               <Category />
             </div>
 
