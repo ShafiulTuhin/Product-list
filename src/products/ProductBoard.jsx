@@ -5,6 +5,7 @@ import ProductsDetails from "./ProductsDetails";
 import Search from "./Search";
 import Sort from "./Sort";
 import { ProductContext } from "../context";
+import { useDebounce } from "../hooks";
 
 import { toast } from "react-toastify";
 
@@ -12,18 +13,38 @@ const ProductBoard = () => {
   const { productData, loading } = useContext(ProductContext);
   const [showSort, setShowSort] = useState(false);
   const [sortOrder, setSortOrder] = useState("low-to-high");
+  const [searchItem, setSearchItem] = useState("");
 
-  //Sorting Data by Price
-  productData.sort((a, b) =>
-    sortOrder === "low-to-high" ? a.price - b.price : b.price - a.price
-  );
+  //Filtering Login for data sort and search:
+  const filterProduct = productData
+    .filter(
+      (product) =>
+        product.title.toLowerCase().includes(searchItem?.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchItem?.toLowerCase())
+    )
+    .sort((a, b) =>
+      sortOrder === "low-to-high" ? a.price - b.price : b.price - a.price
+    );
 
+  // console.log(filterProduct);
+
+  //Sorting function by Price for product
   const handlePriceSort = (order) => {
     setSortOrder(order);
-    toast.success(`Sorted price by ${order}!`, {
-      position: "bottom-center",
+    toast.success(`Sorted price by ${order}.`, {
+      position: "top-center",
     });
     setShowSort(false);
+  };
+
+  //Searching function for product
+  const doSearch = useDebounce((item) => {
+    setSearchItem(item);
+  }, 1000);
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    doSearch(value);
   };
 
   return (
@@ -54,7 +75,7 @@ const ProductBoard = () => {
                 </div>
 
                 <div className="flex gap-2 items-center">
-                  <Search />
+                  <Search onSearch={handleSearch} />
                   <ProductCart />
                 </div>
               </div>
@@ -64,7 +85,7 @@ const ProductBoard = () => {
               <div className="bg-white">
                 <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                   <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                    {productData.map((product) => (
+                    {filterProduct.map((product) => (
                       <ProductsDetails product={product} key={product.id} />
                     ))}
                   </div>
