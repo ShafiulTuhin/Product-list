@@ -48,7 +48,7 @@ const ProductBoard = () => {
   return (
     <>
       {loading.state ? (
-        <p>{loading.message}</p>
+        <p className="item-center">{loading.message}</p>
       ) : (
         <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="pt-16 sm:pt-24 lg:pt-40">

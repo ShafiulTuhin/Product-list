@@ -67,6 +67,11 @@ const useProduct = () => {
   //Fetching product by categories:
   const fetchProductWithCategory = async (category) => {
     try {
+      setLoading({
+        ...loading,
+        state: true,
+        message: `Fetching ${category} prodycts...`,
+      });
       const response = await fetch(
         `https://fakestoreapi.com/products/${category}`
       );
@@ -83,7 +88,7 @@ const useProduct = () => {
       setLoading({
         ...loading,
         state: false,
-        message: "Fetching Product by Category...",
+        message: "",
       });
     }
   };
@@ -114,6 +119,7 @@ const useProduct = () => {
     error,
     loading,
     categories,
+    selectedCategories,
     setSelectedCategories,
   };
 };

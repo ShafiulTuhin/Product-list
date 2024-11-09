@@ -2,8 +2,14 @@ import { ProductContext } from "../context";
 import { useProduct } from "../hooks";
 
 const ProductProvider = ({ children }) => {
-  const { productData, error, loading, categories, setSelectedCategories } =
-    useProduct();
+  const {
+    productData,
+    error,
+    loading,
+    categories,
+    setSelectedCategories,
+    selectedCategories,
+  } = useProduct();
   return (
     <ProductContext.Provider
       value={{
@@ -11,6 +17,7 @@ const ProductProvider = ({ children }) => {
         error,
         loading,
         categories,
+        selectedCategories,
         setSelectedCategories,
       }}
     >

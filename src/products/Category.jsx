@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import { ProductContext } from "../context";
 
 const Category = () => {
-  const { productData, categories, setSelectedCategories } =
+  const { productData, categories, selectedCategories, setSelectedCategories } =
     useContext(ProductContext);
   const [showCatModal, setShowCatModal] = useState(false);
 
-  console.log(setSelectedCategories);
+  console.log(selectedCategories);
 
   const filterCategory = productData.filter(
     (product) =>
@@ -15,17 +15,15 @@ const Category = () => {
         (cat) => `https://fakestoreapi.com/products/category/${cat}`
       )
   );
-  console.log(filterCategory);
 
   const fetchedCategory = (category) => {
-    const fetChedData = setSelectedCategories(category);
-
-    console.log(fetChedData);
+    setSelectedCategories(category);
+    console.log(category);
   };
 
   const handleCategoryChange = (e) => {
-    const checked = e.target.checked;
-    fetchedCategory(checked);
+    const value = e.target.value;
+    fetchedCategory(value);
     setShowCatModal(false);
   };
 
@@ -73,7 +71,8 @@ const Category = () => {
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4"
-                  onChange={handleCategoryChange}
+                  checked
+                  onChange={() => handleCategoryChange(category)}
                 />
                 <span className="ml-2">{category}</span>
               </label>
