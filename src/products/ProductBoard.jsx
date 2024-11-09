@@ -15,7 +15,7 @@ const ProductBoard = () => {
   const [sortOrder, setSortOrder] = useState("low-to-high");
   const [searchItem, setSearchItem] = useState("");
 
-  //Filtering Login for data sort and search:
+  //Filtering product for price-sort and search:
   const filterProduct = productData
     .filter(
       (product) =>
@@ -25,8 +25,6 @@ const ProductBoard = () => {
     .sort((a, b) =>
       sortOrder === "low-to-high" ? a.price - b.price : b.price - a.price
     );
-
-  // console.log(filterProduct);
 
   //Sorting function by Price for product
   const handlePriceSort = (order) => {

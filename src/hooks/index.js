@@ -1,4 +1,4 @@
 import useProduct from "./useProduct";
-import useDebounce from "./useDeBounce";
+import useDebounce from "./useDebounce";
 
 export { useProduct, useDebounce };
