@@ -70,7 +70,7 @@ const useProduct = () => {
       setLoading({
         ...loading,
         state: true,
-        message: `Fetching ${category} prodycts...`,
+        message: `Fetching ${category} products...`,
       });
       const response = await fetch(
         `https://fakestoreapi.com/products/${category}`
