@@ -10,7 +10,7 @@ const Category = () => {
     setSelectedCategories(
       `https://fakestoreapi.com/products/category/${category}`
     );
-    console.log(category);
+
     setShowCatModal(false);
   };
 

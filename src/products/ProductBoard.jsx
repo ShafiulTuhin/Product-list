@@ -10,8 +10,7 @@ import { useDebounce } from "../hooks";
 import { toast } from "react-toastify";
 
 const ProductBoard = () => {
-  const { productData, loading, selectedCategories } =
-    useContext(ProductContext);
+  const { productData, selectedCategories } = useContext(ProductContext);
   const [showSort, setShowSort] = useState(false);
   const [sortOrder, setSortOrder] = useState("low-to-high");
   const [searchItem, setSearchItem] = useState("");
