@@ -2,28 +2,38 @@ import { useContext, useState } from "react";
 import { ProductContext } from "../context";
 
 const Category = () => {
-  const { productData, categories, selectedCategories, setSelectedCategories } =
+  const { categories, selectedCategories, setSelectedCategories } =
     useContext(ProductContext);
   const [showCatModal, setShowCatModal] = useState(false);
 
-  console.log(selectedCategories);
+  // console.log(selectedCategories);
 
-  const filterCategory = productData.filter(
-    (product) =>
-      product.category ===
-      categories.filter(
-        (cat) => `https://fakestoreapi.com/products/category/${cat}`
-      )
-  );
+  // const filterCategory = productData.filter(
+  //   (product) =>
+  //     product.category ===
+  //     categories.filter(
+  //       (cat) => `https://fakestoreapi.com/products/category/${cat}`
+  //     )
+  // );
+  // console.log(filterCategory);
 
-  const fetchedCategory = (category) => {
-    setSelectedCategories(category);
+  // const filterCategory = productData.filter((t) =>
+  //   selectedCategories?.length ? selectedCategories?.includes(t.category) : true
+  // );
+
+  // console.log(filterCategory);
+  // const fetchedCategory = (category) => {
+  //   setSelectedCategories(category);
+  //   console.log(category);
+  // };
+
+  const handleCategoryChange = (category) => {
+    if (selectedCategories?.includes(category)) {
+      setSelectedCategories(null);
+    } else {
+      setSelectedCategories(category);
+    }
     console.log(category);
-  };
-
-  const handleCategoryChange = (e) => {
-    const value = e.target.value;
-    fetchedCategory(value);
     setShowCatModal(false);
   };
 
@@ -71,7 +81,8 @@ const Category = () => {
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4"
-                  checked
+                  // value={(e) => e.target.checked}
+                  checked={selectedCategories?.includes(category)}
                   onChange={() => handleCategoryChange(category)}
                 />
                 <span className="ml-2">{category}</span>

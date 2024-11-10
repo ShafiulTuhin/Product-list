@@ -10,13 +10,19 @@ import { useDebounce } from "../hooks";
 import { toast } from "react-toastify";
 
 const ProductBoard = () => {
-  const { productData, loading } = useContext(ProductContext);
+  const { productData, loading, selectedCategories } =
+    useContext(ProductContext);
   const [showSort, setShowSort] = useState(false);
   const [sortOrder, setSortOrder] = useState("low-to-high");
   const [searchItem, setSearchItem] = useState("");
 
   //Filtering product for price-sort and search:
   const filterProduct = productData
+    .filter((t) =>
+      selectedCategories?.length
+        ? selectedCategories?.includes(t.category)
+        : true
+    )
     .filter(
       (product) =>
         product.title.toLowerCase().includes(searchItem?.toLowerCase()) ||
