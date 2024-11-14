@@ -16,12 +16,14 @@ const ProductsDetails = ({ product }) => {
       item.id === id;
     });
     if (!found) {
-      setCartItems([...cartItems, product]);
+      setCartItems([...cartItems, { ...product }]);
     }
+
+    console.log(cartItems);
     toast.success(`Added ${title} to Cart!`, {
       position: "bottom-center",
     });
-    setAddToCart(!addToCart);
+    setAddToCart(true);
   };
 
   const handleDeleteToCart = (e, productId) => {
@@ -34,7 +36,7 @@ const ProductsDetails = ({ product }) => {
     toast.success(`Deleted ${title} from Cart!`, {
       position: "bottom-center",
     });
-    setAddToCart(!addToCart);
+    setAddToCart(false);
   };
 
   return (

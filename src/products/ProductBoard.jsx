@@ -19,9 +19,7 @@ const ProductBoard = () => {
   const filterProduct = productData
     .filter((product) =>
       selectedCategories?.length
-        ? selectedCategories?.includes(
-            `https://fakestoreapi.com/products/category/${product.category}`
-          )
+        ? selectedCategories?.includes(product.category)
         : true
     )
     .filter(
@@ -32,7 +30,7 @@ const ProductBoard = () => {
     .sort((a, b) =>
       sortOrder === "low-to-high" ? a.price - b.price : b.price - a.price
     );
-
+  console.log(searchItem, filterProduct);
   //Sorting function by Price for product
   const handlePriceSort = (order) => {
     setSortOrder(order);
@@ -45,6 +43,7 @@ const ProductBoard = () => {
   //Searching function for product
   const doSearch = useDebounce((item) => {
     setSearchItem(item);
+    console.log(item);
   }, 1000);
 
   const handleSearch = (e) => {
@@ -85,9 +84,15 @@ const ProductBoard = () => {
           <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
               <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                {filterProduct.map((product) => (
-                  <ProductsDetails product={product} key={product.id} />
-                ))}
+                {filterProduct.length !== 0 ? (
+                  filterProduct.map((product) => (
+                    <ProductsDetails product={product} key={product.id} />
+                  ))
+                ) : (
+                  <h2 className="text-center justify-center text-3xl bg-red-600 p-1 m-auto text-white">
+                    Product not found!
+                  </h2>
+                )}
               </div>
             </div>
           </div>
