@@ -4,9 +4,10 @@ import { CartContext, ProductContext } from "../context";
 import { toast } from "react-toastify";
 
 const ProductsDetails = ({ product }) => {
-  const { loading } = useContext(ProductContext);
+  const { loading, setSelectedCategories } = useContext(ProductContext);
   const { id, title, image, price, category } = product;
   const { cartItems, setCartItems } = useContext(CartContext);
+  console.log(cartItems, product.length);
 
   const [addToCart, setAddToCart] = useState(false);
 
@@ -16,14 +17,14 @@ const ProductsDetails = ({ product }) => {
       item.id === id;
     });
     if (!found) {
-      setCartItems([...cartItems, { ...product }]);
+      setCartItems([...cartItems, product]);
     }
 
     console.log(cartItems);
     toast.success(`Added ${title} to Cart!`, {
       position: "bottom-center",
     });
-    setAddToCart(true);
+    setAddToCart((prev) => !prev);
   };
 
   const handleDeleteToCart = (e, productId) => {
@@ -33,10 +34,11 @@ const ProductsDetails = ({ product }) => {
       return item.id !== productId;
     });
     setCartItems([...filteredItem]);
+
     toast.success(`Deleted ${title} from Cart!`, {
       position: "bottom-center",
     });
-    setAddToCart(false);
+    setAddToCart((prev) => !prev);
   };
 
   return (

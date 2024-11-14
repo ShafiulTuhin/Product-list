@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ProductContext } from "../context";
 
 const Category = () => {
@@ -6,30 +6,13 @@ const Category = () => {
     useContext(ProductContext);
   const [showCatModal, setShowCatModal] = useState(false);
 
-  // const fetchCategoryProduct = async (category) => {
-  //   const response = await fetch(
-  //     `https://fakestoreapi.com/products/category/${category}`
-  //   );
-  //   const data = await response.json();
-  //   setProductData(data);
-  //   console.log(data);
-  // };
-
-  // useEffect(() => {
-  //   fetchCategoryProduct();
-  // }, []);
-
   const handleCategoryChange = (category) => {
-    setSelectedCategories(
-      `https://fakestoreapi.com/products/category/${category}`
+    setSelectedCategories((...prev) =>
+      prev?.includes(category)
+        ? prev.filter((cat) => cat !== category)
+        : [...prev, category]
     );
     setShowCatModal(false);
-
-    // if (selectedCategories.includes(category)) {
-    //   setSelectedCategories(null);
-    // } else {
-    //   setSelectedCategories(category);
-    // }
   };
 
   return (

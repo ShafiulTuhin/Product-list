@@ -7,6 +7,7 @@ import Sort from "./Sort";
 import { ProductContext } from "../context";
 import { useDebounce } from "../hooks";
 
+import NoProduct from "../assets/products/noProduct.png";
 import { toast } from "react-toastify";
 
 const ProductBoard = () => {
@@ -30,7 +31,6 @@ const ProductBoard = () => {
     .sort((a, b) =>
       sortOrder === "low-to-high" ? a.price - b.price : b.price - a.price
     );
-  console.log(searchItem, filterProduct);
   //Sorting function by Price for product
   const handlePriceSort = (order) => {
     setSortOrder(order);
@@ -43,7 +43,6 @@ const ProductBoard = () => {
   //Searching function for product
   const doSearch = useDebounce((item) => {
     setSearchItem(item);
-    console.log(item);
   }, 1000);
 
   const handleSearch = (e) => {
@@ -89,9 +88,13 @@ const ProductBoard = () => {
                     <ProductsDetails product={product} key={product.id} />
                   ))
                 ) : (
-                  <h2 className="text-center justify-center text-3xl bg-red-600 p-1 m-auto text-white">
-                    Product not found!
-                  </h2>
+                  <div className="">
+                    <img
+                      className="flex flex-col justify-center items-center"
+                      src={NoProduct}
+                      alt="No-Product"
+                    />
+                  </div>
                 )}
               </div>
             </div>
